@@ -28,7 +28,7 @@
   ],
   "dataGroups": [
     {
-      "name": "space-x",
+      "name": "SpaceX-api",
       "urls": ["https://api.spaceXdata.com/v3/launches"],
       "cacheConfig": {
         "strategy": "freshness",

@@ -1,0 +1,55 @@
+.app-header {
+    font-weight: 700;
+}
+
+.filter-box {
+    background-color: #ffffff;
+    border-radius: 0.2em;
+    padding: 15px;
+    margin-bottom: 10px;
+
+    .filter-heading {
+        font-size: 15px;
+        font-weight: 700;
+        text-align: start;
+        margin-bottom: 5px;
+    }
+
+    .filter-name {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    .margin-button{
+        width: 90%;
+        margin-bottom: 12px; 
+        background-color: #b5ff0061;   
+    }
+}
+
+.btn:focus{
+    background-color: unset;
+    box-shadow: none !important;
+}
+
+.btn-selected {
+    background-color: green !important;
+}
+
+.hr-style{
+    width: 85%;
+    background-color: black;
+    margin-top: 0;
+}
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    background: #dedbdb;
+    height: 30px;
+    line-height: 2.1;
+}
