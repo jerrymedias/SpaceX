@@ -1,16 +1,21 @@
-<div class="row">
-    <ng-container *ngFor="let launch of launchData; let i = index">
-        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-            <div class="card-main">
-                <div class="card-main-image">
-                    <img src="{{launch.links.mission_patch}}">
+<ng-container *ngIf="launchData">
+    <div class="row">
+        <ng-container *ngFor="let launch of launchData; let i = index">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                <div class="card-main">
+                    <div class="card-main-image">
+                        <img src="{{launch.links.mission_patch}}">
+                    </div>
+                    <h4 class="spacex-name">{{launch.mission_name}} #{{(i+1)}}</h4>
+                    <p class="spacex-details-key">Mission Ids: <span class="spacex-details-value">{{launch.mission_id}}</span></p>
+                    <p class="spacex-details-key">Launch Year: <span class="spacex-details-value">{{launch.launch_year}}</span></p>
+                    <p class="spacex-details-key">Successful Launch: <span class="spacex-details-value">{{launch.launch_success}}</span></p>
+                    <p class="spacex-details-key">Successful Landing: <span class="spacex-details-value">{{launch?.land_success || 'Data Not Available'}}</span></p>
                 </div>
-                <h4 class="spacex-name">{{launch.mission_name}} #{{(i+1)}}</h4>
-                <p class="spacex-details-key">Mission Ids: <span class="spacex-details-value">{{launch.mission_id}}</span></p>
-                <p class="spacex-details-key">Launch Year: <span class="spacex-details-value">{{launch.launch_year}}</span></p>
-                <p class="spacex-details-key">Successful Launch: <span class="spacex-details-value">{{launch.launch_success}}</span></p>
-                <p class="spacex-details-key">Successful Landing: <span class="spacex-details-value">{{launch?.land_success || 'Data Not Available'}}</span></p>
             </div>
-        </div>
-    </ng-container>
-</div>
+        </ng-container>
+    </div>
+</ng-container>
+<ng-container *ngIf="!launchData">
+    <div class="loading">Loading...</div>
+</ng-container>
