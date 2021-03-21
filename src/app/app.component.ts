@@ -9,9 +9,10 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'SpaceX';
-  filterYears: Array<{year: number, selected: boolean}>;
-  filterLaunch: Array<{successfullOrNot: string, selected: boolean}>;
-  filterLand: Array<{successfullOrNot: string, selected: boolean}>;
+  filterYears: Array<number>;
+  selectedYear: number;
+  selectedLaunch: string;
+  selectedLand: string;
   onPageReloadQuerySubscription: Subscription;
 
   constructor(
@@ -31,37 +32,23 @@ export class AppComponent implements OnInit {
     this.filterYears = [];
     const firstYearOfFilter = 2006;
     for(let i = 0; i<=14; i++) {
-      this.filterYears.push({year: firstYearOfFilter + i, selected: false});
+      this.filterYears.push(firstYearOfFilter + i);
     }
-    this.filterLand = [{successfullOrNot: 'True', selected: false}, {successfullOrNot: 'False', selected: false}];
-    this.filterLaunch = [{successfullOrNot: 'True', selected: false}, {successfullOrNot: 'False', selected: false}];
   }
 
   selectFiltersOnRefresh(queryParams): void {
     for(let key in queryParams) {
         switch (key) {
           case 'land_success':
-            this.filterLand.forEach(eachFilter => {
-              if(eachFilter.successfullOrNot.toLowerCase() == queryParams[key]) {
-                eachFilter.selected = true;
-              }
-            });
+            this.selectedLand = queryParams[key];
             break;
 
           case 'launch_success':
-            this.filterLaunch.forEach(eachFilter => {
-              if(eachFilter.successfullOrNot.toLowerCase() == queryParams[key]) {
-                eachFilter.selected = true;
-              }
-            });
+            this.selectedLaunch = queryParams[key];
             break;
 
           case 'launch_year':
-            this.filterYears.forEach(eachFilter => {
-              if(eachFilter.year == queryParams[key]) {
-                eachFilter.selected = true;
-              }
-            });
+            this.selectedYear = queryParams[key];
 
           default:
             break;
@@ -69,38 +56,28 @@ export class AppComponent implements OnInit {
     }
   }
 
-  getLaunchDataWithFilters(eventFromFilter, event, index): void {
+  getLaunchDataWithFilters(eventFromFilter, event): void {
     switch (eventFromFilter) {
       case 'year':
-        this.setFilterSelection(this.filterYears, index, event);
-        this.setFilterQueryParams({launch_year: event.selected ? event.year : null});
+        this.selectedYear = this.selectedYear == event ? null : event; 
+        this.setFilterQueryParams({launch_year: this.selectedYear});
         break;
       
       case 'launch':
-        this.setFilterSelection(this.filterLaunch, index, event);
-        this.setFilterQueryParams({launch_success: event.selected ? event.successfullOrNot == 'True' ? true : false : null});
+        this.selectedLaunch = this.selectedLaunch == event ? null : event;
+        this.setFilterQueryParams({launch_success: this.selectedLaunch == 'true' ? true : this.selectedLaunch == 'false' ? false : null });
         break;
       
       case 'land':
-        this.setFilterSelection(this.filterLand, index, event);
-        this.setFilterQueryParams({land_success: event.selected ? event.successfullOrNot == 'True' ? true : false : null});
+        this.selectedLand = this.selectedLand == event ? null : event;
+        this.setFilterQueryParams({land_success: this.selectedLand == 'true' ? true : this.selectedLand == 'false' ? false : null});
         break;
 
       default:
         break;
     }
   }
-
-  setFilterSelection(filterList, index, event): void {
-    filterList.forEach((eachFilter, i) => {
-      if(index == i) {
-        eachFilter.selected = !event.selected;
-      } else {
-        eachFilter.selected = false;
-      }
-    });
-  }
-
+  
   setFilterQueryParams(filterQueryParams): void {
     this.onPageReloadQuerySubscription && this.onPageReloadQuerySubscription.unsubscribe();
     this.router.navigate([], {

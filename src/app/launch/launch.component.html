@@ -7,7 +7,7 @@
                         <img src="{{launch.links.mission_patch}}">
                     </div>
                     <h4 class="spacex-name">{{launch.mission_name}} #{{(i+1)}}</h4>
-                    <p class="spacex-details-key">Mission Ids: <span class="spacex-details-value">{{launch.mission_id}}</span></p>
+                    <p class="spacex-details-key">Mission Ids: <span class="spacex-details-value">{{launch.mission_id.join() || 'No Mission Id found'}}</span></p>
                     <p class="spacex-details-key">Launch Year: <span class="spacex-details-value">{{launch.launch_year}}</span></p>
                     <p class="spacex-details-key">Successful Launch: <span class="spacex-details-value">{{launch.launch_success}}</span></p>
                     <p class="spacex-details-key">Successful Landing: <span class="spacex-details-value">{{launch?.land_success || 'Data Not Available'}}</span></p>
@@ -15,6 +15,9 @@
             </div>
         </ng-container>
     </div>
+</ng-container>
+<ng-container *ngIf="launchData && launchData.length == 0">
+    <div class="loading">No Data To show</div>
 </ng-container>
 <ng-container *ngIf="!launchData">
     <div class="loading">Loading...</div>

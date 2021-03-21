@@ -20,7 +20,7 @@ export class LaunchService {
   getLaunches(launchApiQueryParams: LaunchApiQueryParams): Observable<any> {
     let url = 'https://api.spacexdata.com/v3/launches';
     for(let param in launchApiQueryParams) {
-      url += `${this.giveQuerySign(url)}${param}=${launchApiQueryParams[param]}`;
+      url += `${this.giveQuerySign(url)}${param}=${launchApiQueryParams[param] == 'true' ? true : launchApiQueryParams[param] == 'false' ? false : launchApiQueryParams[param]}`;
     }
     return this.http.get(url);
   }

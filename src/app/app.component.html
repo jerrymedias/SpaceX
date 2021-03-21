@@ -15,9 +15,9 @@
           <p class="filter-name">Launch Year</p>
           <hr class="hr-style" />
           <div class="row">
-            <ng-container *ngFor="let yearObj of filterYears; let i = index">
+            <ng-container *ngFor="let year of filterYears; let i = index">
               <div class="col-6 text-center">
-                <button class="btn  btn-sm  margin-button" id="{{yearObj.year}}" [ngClass]="yearObj.selected ? 'btn-selected' : ''" (click)="getLaunchDataWithFilters('year', yearObj, i)">{{yearObj.year}}</button>
+                <button class="btn  btn-sm  margin-button" id="{{year}}" [ngClass]="selectedYear == year ? 'btn-selected' : ''" (click)="getLaunchDataWithFilters('year', year)">{{year}}</button>
               </div>
             </ng-container>
           </div>
@@ -26,9 +26,9 @@
             <p class="filter-name">Successful Launch</p>
             <hr class="hr-style" />
             <div class="row">
-              <ng-container *ngFor="let launchObj of filterLaunch; let i = index">
+              <ng-container *ngFor="let launch of ['true', 'false']; let i = index">
                 <div class="col-6 text-center">
-                  <button class="btn  btn-sm  margin-button" [ngClass]="launchObj.selected ? 'btn-selected' : ''"  (click)="getLaunchDataWithFilters('launch', launchObj, i)">{{launchObj.successfullOrNot}}</button>
+                  <button class="btn  btn-sm  margin-button" [ngClass]="selectedLaunch == launch ? 'btn-selected' : ''"  (click)="getLaunchDataWithFilters('launch', launch)">{{launch | titlecase}}</button>
                 </div>
               </ng-container>
             </div>
@@ -38,9 +38,9 @@
             <p class="filter-name">Successful Landing</p>
             <hr class="hr-style" />
             <div class="row">
-              <ng-container *ngFor="let landObj of filterLand; let i = index">
+              <ng-container *ngFor="let land of ['true', 'false']; let i = index">
                 <div class="col-6 text-center">
-                  <button class="btn  btn-sm  margin-button" [ngClass]="landObj.selected ? 'btn-selected' : ''" id="{{landObj.successfullOrNot}}" (click)="getLaunchDataWithFilters('land', landObj, i)">{{landObj.successfullOrNot}}</button>
+                  <button class="btn  btn-sm  margin-button" [ngClass]="land == selectedLand ? 'btn-selected' : ''" id="{{land}}" (click)="getLaunchDataWithFilters('land', land)">{{land | titlecase}}</button>
                 </div>
               </ng-container>
             </div>
