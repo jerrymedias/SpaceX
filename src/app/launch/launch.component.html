@@ -4,7 +4,7 @@
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                 <div class="card-main">
                     <div class="card-main-image">
-                        <img src="{{launch.links.mission_patch}}">
+                        <img [attr.data-src]="launch.links.mission_patch">
                     </div>
                     <h4 class="spacex-name">{{launch.mission_name}} #{{(i+1)}}</h4>
                     <p class="spacex-details-key">Mission Ids: <span class="spacex-details-value">{{launch.mission_id.join() || 'No Mission Id found'}}</span></p>
