@@ -10,7 +10,7 @@
                     <p class="spacex-details-key">Mission Ids: <span class="spacex-details-value">{{launch.mission_id.join() || 'No Mission Id found'}}</span></p>
                     <p class="spacex-details-key">Launch Year: <span class="spacex-details-value">{{launch.launch_year}}</span></p>
                     <p class="spacex-details-key">Successful Launch: <span class="spacex-details-value">{{launch.launch_success}}</span></p>
-                    <p class="spacex-details-key">Successful Landing: <span class="spacex-details-value">{{launch?.land_success || 'Data Not Available'}}</span></p>
+                    <p class="spacex-details-key">Successful Landing: <span class="spacex-details-value">{{launch.rocket.first_stage.cores[0].land_success == null ? 'false' : launch.rocket.first_stage.cores[0].land_success.toString() || 'Data Not Available'}}</span></p>
                 </div>
             </div>
         </ng-container>
