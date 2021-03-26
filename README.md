@@ -2,7 +2,7 @@
 
 This project focus is to build a small app where we can show spacex launch and landing success respective to year, there is a filter section to apply filters on spacex data.
 
-This project is a PWA application which is responsive for all 6 resoluions.
+This project is a PWA application & also added intersection observer for lazy loading rocket images.
 
 Project stack is Angular9, Typescript, Javascript, HTML, SCSS, Bootstrap.
 
